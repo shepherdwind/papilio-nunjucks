@@ -27,7 +27,6 @@
     "should": "~6.0.3"
   },
   "scripts": {
-    "test": "mocha test",
-    "test-cov": "istanbul cover node_modules/.bin/_mocha test"
+    "test": "node --harmony node_modules/.bin/istanbul cover node_modules/.bin/_mocha test"
   }
 }
