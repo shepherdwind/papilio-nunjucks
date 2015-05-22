@@ -1,8 +1,10 @@
 ## papilio-nunjucks
 
+[![build status](http://gitlab-ci.alipay-inc.com/projects/109/status.png?ref=master)](http://gitlab-ci.alipay-inc.com/projects/109?ref=master)
+
 ### use
 
-```
+```js
 var nunjucks = require('@alipay/papilio-nunjucks');
 nunjucks(base)
 .engine('.vm', function(name) {
@@ -24,7 +26,7 @@ nunjucks(base)
 
 当use方法返回一个Promise或者是一个generator方法的时候，可以使用异步的render方法:
 
-```
+```js
 nunjucks(base)
 .use(function*() {
   var data = yield Promise.resolve({name: 'inner'});
@@ -45,7 +47,7 @@ nunjucks(base)
 
 增加tag use
 
-```
+```html
 {% use 'schemas/shop.js' %}
   {{title}} is {{url}} {{img}}
 {% enduse %}
