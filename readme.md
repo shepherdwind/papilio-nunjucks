@@ -1,9 +1,22 @@
 ## papilio-nunjucks
 
+[![NPM version][npm-image]][npm-url]
+[![build status][travis-image]][travis-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+
+
+[npm-image]: http://img.shields.io/npm/v/papilio-nunjucks.svg?style=flat-square
+[npm-url]: http://npmjs.org/package/papilio-nunjucks
+[travis-image]: https://img.shields.io/travis/shepherdwind/papilio-nunjucks.svg?style=flat-square
+[travis-url]: https://travis-ci.org/shepherdwind/papilio-nunjucks
+[coveralls-image]: https://img.shields.io/coveralls/shepherdwind/papilio-nunjucks.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/shepherdwind/papilio-nunjucks?branch=master
+
+
 ### API
 
 ```js
-var nunjucks = require('simple-nunjucks');
+var nunjucks = require('papilio-nunjucks');
 nunjucks(base)
 .engine('.vm', function(name) {
   // .vm file retrun empty string
