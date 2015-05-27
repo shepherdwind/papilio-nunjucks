@@ -77,34 +77,31 @@ describe('extention.test.js', function() {
 
   it('async use support', function(done) {
     nunjucks(base)
+    .yield()
     .use(function() {
       return Promise.resolve({name: 'inner'});
     })
-    .render('use/html.html', function(err, ret) {
-      if (err) {
-        return done(err);
-      }
+    .render('use/html.html').then(function(ret) {
       ret.trim()
       .should
       .eql('<div> inner </div>');
       done();
-    });
+    })
+    .catch(done);
   });
 
   it('async generator support', function(done) {
     nunjucks(base)
+    .yield()
     .use(function*() {
       var data = yield Promise.resolve({name: 'inner'});
       return data;
     })
-    .render('use/html.html', function(err, ret) {
-      if (err) {
-        return done(err);
-      }
+    .render('use/html.html').then(function(ret) {
       ret.trim()
       .should
       .eql('<div> inner </div>');
       done();
-    });
+    }).catch(done);
   });
 });

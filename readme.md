@@ -1,18 +1,16 @@
 ## papilio-nunjucks
 
-[![build status](http://gitlab-ci.alipay-inc.com/projects/109/status.png?ref=master)](http://gitlab-ci.alipay-inc.com/projects/109?ref=master)
-
-### use
+### API
 
 ```js
-var nunjucks = require('@alipay/papilio-nunjucks');
+var nunjucks = require('simple-nunjucks');
 nunjucks(base)
 .engine('.vm', function(name) {
-  // vm文件不输出
+  // .vm file retrun empty string
   return '';
 })
 .engine('.css', function(file) {
-  // css自动追加style
+  // css wraped with style tag
   var str = fs.readFileSync(file).toString();
   return '<style>\n' + str + '</style>';
 })
@@ -22,30 +20,36 @@ nunjucks(base)
 .render('index.html')
 ```
 
-### 异步tag是使用
+### async render tag
 
-当use方法返回一个Promise或者是一个generator方法的时候，可以使用异步的render方法:
+You could use methd `yield()` to change render method retrun an promise, so you
+can pass an generator function to use method, like this:
 
 ```js
 nunjucks(base)
+.yield()
 .use(function*() {
   var data = yield Promise.resolve({name: 'inner'});
   return data;
 })
-.render('use/html.html', function(err, ret) {
-  if (err) {
-    return done(err);
-  }
+.render('use/html.html').then(function(ret) {
   ret.trim()
   .should
   .eql('<div> inner </div>');
-});
-
+})
+.catch(done);
 ```
 
-### 语法
+In koa, you can write code like this:
 
-增加tag use
+```
+var view = nunjucks(base).yield().use(this.services.getData);
+return yield view.render(xx.html)
+```
+
+### use tag
+
+Add a custom tag support
 
 ```html
 {% use 'schemas/shop.js' %}
@@ -53,6 +57,15 @@ nunjucks(base)
 {% enduse %}
 ```
 
-use tag直接的变量上下文由use方法传递进来的函数返回数据决定，如果返回一个数组，
-运行效果和for语法一直。
+The template wraped by use tag, then, those template context will be the use
+method return value.
+
+Such as `use 'schemas/shop'` return an object `{title: 1, url: 2, img: 3}`, then
+use tag render as `1 is 2 3`.
+
+When use tag return a array, template render just like for loop. Each loop run,
+the template context will change to the current array item object. Also you can
+use loop local variable.
+
+You can see more example as code `test/extention.test.js`.
 
