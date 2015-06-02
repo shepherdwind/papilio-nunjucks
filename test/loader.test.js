@@ -7,7 +7,7 @@ var base = path.join(__dirname, './fixtures/');
 describe('extention.test.js', function() {
   it('array should render as each', function() {
     nunjucks(base)
-    .engine('.vm', function(name) {
+    .engine('.vm', function() {
       // no out put when ext is .vm
       return '';
     })
@@ -18,5 +18,17 @@ describe('extention.test.js', function() {
     .render('index.html')
     .trim()
     .should.eql('<style>\nbody {\n  color: red;\n}\n</style>');
+  });
+
+  it('add filter support', function() {
+    function discount(price, old) {
+      return (price / old).toFixed(2);
+    }
+    nunjucks(base)
+    .filter('stringify', JSON.stringify)
+    .filter('discount', discount)
+    .render('filter.html', { a: [1, 2], price: 6, old: 12})
+    .trim()
+    .should.eql('now [1,2] 0.50');
   });
 });

@@ -18,6 +18,7 @@
 ```js
 var nunjucks = require('papilio-nunjucks');
 nunjucks(base)
+.filter('stringify', JSON.stringify)
 .engine('.vm', function(name) {
   // .vm file retrun empty string
   return '';
