@@ -104,4 +104,20 @@ describe('extention.test.js', function() {
       done();
     }).catch(done);
   });
+
+  it('use could wrap with tag', function() {
+    nunjucks(base)
+    .use(function() {
+      return arr[0];
+    }, function(name) {
+      return [
+        '<div class="tag" data-schema="' + name + '">',
+        '</div>'
+      ];
+    })
+    .render('use/simple.html')
+    .trim()
+    .should
+    .eql('<div class="tag" data-schema="schemas/shop"> hello is hanwen haha </div>');
+  });
 });

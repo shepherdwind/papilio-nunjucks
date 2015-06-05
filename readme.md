@@ -30,6 +30,11 @@ nunjucks(base)
 })
 .use(function(schema) {
   return getData(schema);
+}, function(schema) {
+  return [
+    '<div class="tag" data-schema="' + schema + '">',
+    '</div>'
+  ];
 })
 .render('index.html')
 ```
