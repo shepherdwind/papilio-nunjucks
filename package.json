@@ -25,6 +25,9 @@
     "mocha-lcov-reporter": "0.0.2",
     "should": "~6.0.3"
   },
+  "browser": {
+    "fs": false
+  },
   "scripts": {
     "test": "node --harmony node_modules/.bin/istanbul cover node_modules/.bin/_mocha test",
     "cov": "make cov"
