@@ -109,11 +109,9 @@ describe('extention.test.js', function() {
     nunjucks(base)
     .use(function() {
       return arr[0];
-    }, function(name) {
-      return [
-        '<div class="tag" data-schema="' + name + '">',
-        '</div>'
-      ];
+    }, function(name, html) {
+      return '<div class="tag" data-schema="' + name + '">' + html +
+             '</div>';
     })
     .render('use/simple.html')
     .trim()
