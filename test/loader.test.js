@@ -15,9 +15,13 @@ describe('extention.test.js', function() {
       var str = fs.readFileSync(file).toString();
       return '<style>\n' + str + '</style>';
     })
+    .engine('.js', function(file) {
+      var str = fs.readFileSync(file).toString();
+      return '<script>\n' + str + '</script>';
+    })
     .render('index.html')
     .trim()
-    .should.eql('<style>\nbody {\n  color: red;\n}\n</style>');
+    .should.eql('<style>\nbody {\n  color: red;\n}\n</style>\n<script>\nvar a = \'{% 112 %}\';\n</script>');
   });
 
   it('add filter support', function() {
