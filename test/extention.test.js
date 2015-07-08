@@ -73,6 +73,7 @@ describe('extention.test.js', function() {
     .trim()
     .should
     .eql('a1 \n 1  2 \n c \n\nout');
+    data.b.should.eql([{name: 1}, {name: 2}]);
   });
 
   it('async use support', function(done) {
