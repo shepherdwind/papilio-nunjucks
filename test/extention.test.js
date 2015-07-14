@@ -119,4 +119,15 @@ describe('extention.test.js', function() {
     .should
     .eql('<div class="tag" data-schema="schemas/shop"> hello is hanwen haha </div>');
   });
+
+  it('use as var should support', function() {
+    nunjucks(base)
+    .use(function() {
+      return arr;
+    })
+    .render('use/as.html')
+    .trim()
+    .should
+    .eql('hello\n    hanwen\n  \n    hello1\n    hanwen2');
+  });
 });
