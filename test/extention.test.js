@@ -130,4 +130,18 @@ describe('extention.test.js', function() {
     .should
     .eql('hello\n    hanwen\n  \n    hello1\n    hanwen2');
   });
+
+  it('vm extention support', function() {
+    nunjucks(base)
+    .use(function() {
+      return arr;
+    })
+    .vm(function(name) {
+      return '${' + name + '}';
+    })
+    .render('vm/b.html')
+    .trim()
+    .should
+    .eql('hello ${user.name}');
+  });
 });
