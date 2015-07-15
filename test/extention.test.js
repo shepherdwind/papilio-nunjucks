@@ -144,4 +144,15 @@ describe('extention.test.js', function() {
     .should
     .eql('hello ${user.name}');
   });
+
+  it('vm extention support when no view', function() {
+    nunjucks(base)
+    .use(function() {
+      return arr;
+    })
+    .render('vm/b.html')
+    .trim()
+    .should
+    .eql('hello $!user.name');
+  });
 });
