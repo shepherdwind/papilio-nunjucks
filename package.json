@@ -1,6 +1,6 @@
 {
   "name": "papilio-nunjucks",
-  "version": "1.4.2",
+  "version": "1.4.4",
   "description": "papilio template render package",
   "main": "index.js",
   "repository": {
